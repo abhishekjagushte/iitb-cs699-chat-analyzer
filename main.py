@@ -31,6 +31,13 @@ if file is not None:
     data["negative"] = [sentiments.polarity_scores(i)["negative"] for i in data["message"]]
     data["neutral"] = [sentiments.polarity_scores(i)["neutral"] for i in data["message"]]
     data['value'] = data.apply(lambda row: sentiment_analysis(row), axis=1)
+    
+    userl = data['user'].unique().tolist()
+    userl.sort()
+    userl.insert(0, "Overall")
+    selected = st.sidebar.selectbox("Show analysis wrt", userl)
+    if st.sidebar.button("Show Analysis"):
+            # DO YOUR ANALYSIS HERE !!
 
     
 
