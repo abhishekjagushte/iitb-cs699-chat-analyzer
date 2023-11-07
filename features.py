@@ -17,3 +17,11 @@ def monthly(selected,df,sentiment):
         df = df[df['user'] == selected]
     df = df[df['value'] == sentiment]
     return df['month'].value_counts()
+
+#Count of messages of selected user per date having (0, 1, -1) sentiment
+def daily(selected,df,sentimnent):
+    if selected != 'Overall':
+        df = df[df['user'] == selected]
+    df = df[df['value'] == sentiment]
+    daily = df.groupby('only_date').count()['message'].reset_index()
+    return daily
