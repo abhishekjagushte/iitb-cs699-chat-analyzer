@@ -25,3 +25,15 @@ def daily(selected,df,sentimnent):
     df = df[df['value'] == sentiment]
     daily = df.groupby('only_date').count()['message'].reset_index()
     return daily
+
+#Count of messages of selected user per {year + month number + month} having (0, 1, -1) sentiment
+def timeline(selected,df,sentiment):
+    if selected != 'Overall':
+        df = df[df['user'] == selected]
+    df = df[df['value']==-sentiment]
+    timeline = df.groupby(['year', 'month_num', 'month']).count()['message'].reset_index()
+    time = []
+    for i in range(timeline.shape[0]):
+        time.append(timeline['month'][i] + "-" + str(timeline['year'][i]))
+    timeline['time'] = time
+    return timeline
