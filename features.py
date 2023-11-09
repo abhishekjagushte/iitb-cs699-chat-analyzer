@@ -18,7 +18,7 @@ def monthly(selected,df,sentiment):
     df = df[df['value'] == sentiment]
     return df['month'].value_counts()
 
-#Count of messages of selected user per date having (0, 1, -1) sentiment
+#Count of messages of selected user per date having (0, 1, -1) sentiment.
 def daily(selected,df,sentimnent):
     if selected != 'Overall':
         df = df[df['user'] == selected]
@@ -26,7 +26,7 @@ def daily(selected,df,sentimnent):
     daily = df.groupby('only_date').count()['message'].reset_index()
     return daily
 
-#Count of messages of selected user per {year + month number + month} having (0, 1, -1) sentiment
+#Count of messages of selected user per {year + month number + month} having (0, 1, -1) sentiment.
 def timeline(selected,df,sentiment):
     if selected != 'Overall':
         df = df[df['user'] == selected]
@@ -37,3 +37,9 @@ def timeline(selected,df,sentiment):
         time.append(timeline['month'][i] + "-" + str(timeline['year'][i]))
     timeline['time'] = time
     return timeline
+
+#Percentage of message contributed having (0, 1, -1) sentiment.
+def percentage(df,sentiment):
+    df = round((df['user'][df['value']==sentiment].value_counts() / df[df['value']==sentiment].shape[0]) * 100, 2).reset_index().rename(
+        columns={'index': 'name', 'user': 'percent'})
+    return df
