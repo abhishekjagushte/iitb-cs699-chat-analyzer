@@ -64,3 +64,20 @@ def wordcloud(selected,df,sentiment):
     temp['message'] = temp['message'][temp['value'] == sentiment]
     df_wc = wc.generate(temp['message'].str.cat(sep=" "))
     return df_wc
+
+# Common words having (0, 1, -1) sentiment
+def common_words(selected,df,sentiment):
+    f = open('stop_hinglish.txt','r')
+    stop_words = f.read()
+    if selected != 'Overall':
+        df = df[df['user'] == selected]
+    temp = df[df['user'] != 'group_notification']
+    temp = temp[temp['message'] != '<Media omitted>\n']
+    words = []
+    for message in temp['message'][temp['value'] == sentiment]:
+        for word in message.lower().split():
+            if word not in stop_words:
+                words.append(word)         
+    # Most common 20 entries
+    most_common_df = pd.DataFrame(Counter(words).most_common(20))
+    return most_common_df
