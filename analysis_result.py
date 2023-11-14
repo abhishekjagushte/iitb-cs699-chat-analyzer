@@ -53,3 +53,32 @@ def create_weekly_analysis(selected, data):
         ax.bar(busy_day.index, busy_day.values, color='red')
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
+
+
+def create_daily_timeline(selected, data):
+    # Daily timeline
+    st.markdown("## Daily Timeline")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("### Positive")
+        daily_timeline = features.timeline(selected, data, 1)
+        fig, ax = plt.subplots()
+        ax.plot(daily_timeline['day'], daily_timeline['message'], color='green')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+
+    with col2:
+        st.markdown("### Neutral")        
+        daily_timeline = features.timeline(selected, data, 0)
+        fig, ax = plt.subplots()
+        ax.plot(daily_timeline['day'], daily_timeline['message'], color='grey')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+
+    with col3:
+        st.markdown("### Negative")        
+        daily_timeline = features.timeline(selected, data, -1)
+        fig, ax = plt.subplots()
+        ax.plot(daily_timeline['day'], daily_timeline['message'], color='red')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)

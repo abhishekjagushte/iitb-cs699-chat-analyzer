@@ -42,3 +42,10 @@ if file is not None:
     if st.sidebar.button("Show Analysis"):        
         # show monthly analysis
         analysis_result.create_monthly_analysis(selected, data)
+
+        # show weekly analysis
+        analysis_result.create_weekly_analysis(selected, data)
+        
+        # show weekly analysis
+        analysis_result.create_daily_timeline(selected, data)
+        

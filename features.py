@@ -28,15 +28,15 @@ def daily(selected,df,sentimnent):
     return daily
 
 #Count of messages of selected user per {year + month number + month} having (0, 1, -1) sentiment.
-def timeline(selected,df,sentiment):
+def timeline(selected, df, sentiment):
     if selected != 'Overall':
         df = df[df['user'] == selected]
-    df = df[df['value']==-sentiment]
-    timeline = df.groupby(['year', 'month_num', 'month']).count()['message'].reset_index()
+    df = df[df['value'] == -sentiment]
+    timeline = df.groupby(['year', 'month_num', 'month', 'day']).count()['message'].reset_index()
     time = []
     for i in range(timeline.shape[0]):
-        time.append(timeline['month'][i] + "-" + str(timeline['year'][i]))
-    timeline['time'] = time
+        time.append(str(timeline['day'][i]) + "-" + str(timeline['month_num'][i]) + "-" + str(timeline['year'][i]))
+    timeline['day'] = time
     return timeline
 
 #Percentage of message contributed having (0, 1, -1) sentiment.
