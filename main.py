@@ -14,14 +14,6 @@ file = st.sidebar.file_uploader("Select a file")
 # Main heading
 st.header("WhatsApp Chat Analysis")
 
-# Sentiment analysis function
-def sentiment_analysis(d):
-        if d["neutral"] > d["positive"] and d["neutral"] > d["negative"]:
-            return 0
-        if d["positive"] > d["negative"] and d["positive"] > d["neutral"]:
-            return 1
-        if d["negative"] >= d["positive"] and d["negative"] >= d["neutral"]:
-            return -1
 
 if file is not None:
     raw_data = file.getvalue()
