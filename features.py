@@ -1,6 +1,7 @@
 import pandas as pd
 from wordcloud import WordCloud
 from collections import Counter
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 #-1 => Negative
 # 0 => Neutral
@@ -91,3 +92,21 @@ def user_sentiment_summary(df):
 
     return positive_users, neutral_users, negative_users
 
+# Sentiment analysis function
+def get_sentiment(row):
+    if row["neutral"] > row["positive"] and row["neutral"] > row["negative"]:
+        return 0
+    if row["positive"] > row["negative"] and row["positive"] > row["neutral"]:
+        return 1
+    if row["negative"] >= row["positive"] and row["negative"] >= row["neutral"]:
+        return -1
+
+def sentiment_analysis(data):
+    sentiments = SentimentIntensityAnalyzer()
+    data["positive"] = [sentiments.polarity_scores(i)["pos"] for i in data["message"]]
+    data["negative"] = [sentiments.polarity_scores(i)["neg"] for i in data["message"]]
+    data["neutral"] = [sentiments.polarity_scores(i)["neu"] for i in data["message"]]
+
+    data["value"] = data.apply(lambda row: get_sentiment(row), axis=1)
+
+    return data

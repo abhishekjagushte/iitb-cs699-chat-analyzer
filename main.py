@@ -1,8 +1,8 @@
 import nltk
 import streamlit as st
 import preprocessor
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import analysis_result
+import features
 nltk.download('vader_lexicon')
 
 # App title
@@ -26,12 +26,12 @@ def sentiment_analysis(d):
 if file is not None:
     raw_data = file.getvalue()
     unprocessed_data = raw_data.decode("utf-8")
+    
+    # Data pre-processing
     data = preprocessor.preprocessing(unprocessed_data)
-    sentiments = SentimentIntensityAnalyzer()
-    data["positive"] = [sentiments.polarity_scores(i)["pos"] for i in data["message"]]
-    data["negative"] = [sentiments.polarity_scores(i)["neg"] for i in data["message"]]
-    data["neutral"] = [sentiments.polarity_scores(i)["neu"] for i in data["message"]]
-    data['value'] = data.apply(lambda row: sentiment_analysis(row), axis=1)
+    
+    # Sentiment Analysis. This sets a column "value" which either contains 1 (positive) or -1 (negative) or 0 (neutral)
+    data = features.sentiment_analysis(data)
     
     userl = data['user'].unique().tolist()
     userl.sort()

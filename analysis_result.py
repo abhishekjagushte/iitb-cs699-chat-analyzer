@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 def create_monthly_analysis(selected_user, data):
     st.markdown("## Monthly analysis")
+    st.markdown("This shows the monhtly analysis of chats")
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("### Positive")
@@ -14,6 +15,14 @@ def create_monthly_analysis(selected_user, data):
         st.pyplot(fig)
         
     with col2:
+        st.markdown("### Neutral")
+        busy_month = features.monthly(selected_user, data, 0)
+        fig, ax = plt.subplots()
+        ax.bar(busy_month.index, busy_month.values, color='gray')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+
+    with col3:
         st.markdown("### Negative")        
         busy_month = features.monthly(selected_user, data, -1)
         fig, ax = plt.subplots()
@@ -21,13 +30,6 @@ def create_monthly_analysis(selected_user, data):
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
 
-    with col3:
-        st.markdown("### Neutral")
-        busy_month = features.monthly(selected_user, data, 0)
-        fig, ax = plt.subplots()
-        ax.bar(busy_month.index, busy_month.values, color='red')
-        plt.xticks(rotation='vertical')
-        st.pyplot(fig)
         
 def create_weekly_analysis(selected, data):
     st.markdown("## Weekly analysis")
@@ -120,19 +122,19 @@ def create_member_contribution(selected, data):
         st.markdown("## Member Contribution")
         col1,col2,col3 = st.columns(3)
         with col1:
-            st.markdown("### Most Positive Contribution",unsafe_allow_html=True)
+            st.markdown("### Most Positive",unsafe_allow_html=True)
             contributions = features.member_contribution(data, 1)
             
             # Plot the data
             st.dataframe(contributions)
         with col2:
-            st.markdown("### Most Neutral Contribution",unsafe_allow_html=True)
+            st.markdown("### Most Neutral",unsafe_allow_html=True)
             contributions = features.member_contribution(data, 0)
             
             # Plot the data
             st.dataframe(contributions)
         with col3:
-            st.markdown("### Most Negative Contribution",unsafe_allow_html=True)
+            st.markdown("### Most Negative",unsafe_allow_html=True)
             contributions = features.member_contribution(data, -1)
             
             # Plot the data
@@ -175,7 +177,7 @@ def create_wordcloud(selected, data):
     col1,col2,col3 = st.columns(3)
     with col1:
         try:
-            st.markdown("### Positive WordCloud",unsafe_allow_html=True)
+            st.markdown("### Positive",unsafe_allow_html=True)
             
             positive_wordcloud = features.wordcloud(selected, data,1)
             fig, ax = plt.subplots()
@@ -185,7 +187,7 @@ def create_wordcloud(selected, data):
             st.image('assets/images/error.webp')
     with col2:
         try:
-            st.markdown("### Neutral WordCloud",unsafe_allow_html=True)
+            st.markdown("### Neutral",unsafe_allow_html=True)
             
             neutral_wordcloud = features.wordcloud(selected, data,0)
             fig, ax = plt.subplots()
@@ -195,7 +197,7 @@ def create_wordcloud(selected, data):
             st.image('assets/images/error.webp')
     with col3:
         try:
-            st.markdown("### Negative WordCloud",unsafe_allow_html=True)
+            st.markdown("### Negative",unsafe_allow_html=True)
             
             negative_wordcloud = features.wordcloud(selected, data,-1)
             fig, ax = plt.subplots()
