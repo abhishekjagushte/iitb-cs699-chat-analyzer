@@ -13,7 +13,7 @@ def create_monthly_analysis(selected_user, data):
         ax.bar(busy_month.index, busy_month.values, color='green')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col2:
@@ -23,7 +23,7 @@ def create_monthly_analysis(selected_user, data):
         ax.bar(busy_month.index, busy_month.values, color='gray')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col3:
@@ -33,7 +33,7 @@ def create_monthly_analysis(selected_user, data):
         ax.bar(busy_month.index, busy_month.values, color='red')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
 def create_weekly_analysis(selected, data):
@@ -47,7 +47,7 @@ def create_weekly_analysis(selected, data):
         ax.bar(busy_day.index, busy_day.values, color='green')
         plt.xticks(rotation='vertical')
         plt.xlabel('Week')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col2:
@@ -57,7 +57,7 @@ def create_weekly_analysis(selected, data):
         ax.bar(busy_day.index, busy_day.values, color='grey')
         plt.xticks(rotation='vertical')
         plt.xlabel('Week')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col3:
@@ -67,7 +67,7 @@ def create_weekly_analysis(selected, data):
         ax.bar(busy_day.index, busy_day.values, color='red')
         plt.xticks(rotation='vertical')
         plt.xlabel('Week')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
 def create_daily_timeline(selected, data):
@@ -82,7 +82,7 @@ def create_daily_timeline(selected, data):
         ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='green')
         plt.xticks(rotation='vertical')
         plt.xlabel('Date')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col2:
@@ -92,7 +92,7 @@ def create_daily_timeline(selected, data):
         ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='grey')
         plt.xticks(rotation='vertical')
         plt.xlabel('Date')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
     with col3:
@@ -102,7 +102,7 @@ def create_daily_timeline(selected, data):
         ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='red')
         plt.xticks(rotation='vertical')
         plt.xlabel('Date')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
 def create_monthly_timeline(selected, data):
@@ -117,7 +117,7 @@ def create_monthly_timeline(selected, data):
         ax.plot(timeline['time'], timeline['message'], color='green')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
     with col2:
         st.markdown("### Neutral")
@@ -126,7 +126,7 @@ def create_monthly_timeline(selected, data):
         ax.plot(timeline['time'], timeline['message'], color='grey')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
     with col3:
         st.markdown("### Negative")
@@ -135,7 +135,7 @@ def create_monthly_timeline(selected, data):
         ax.plot(timeline['time'], timeline['message'], color='red')
         plt.xticks(rotation='vertical')
         plt.xlabel('Month')
-        plt.ylabel('Count')
+        plt.ylabel('Messages Count')
         st.pyplot(fig)
 
 def create_member_contribution(selected, data):
@@ -173,7 +173,7 @@ def create_user_sentiment_summary(selected, data):
             ax.bar(positive_users.index, positive_users.values, color='green')
             plt.xticks(rotation='vertical')
             plt.xlabel('User')
-            plt.ylabel('Count')
+            plt.ylabel('Messages Count')
             st.pyplot(fig)
         with col2:
             st.markdown("### Most Neutral", unsafe_allow_html=True)
@@ -181,7 +181,7 @@ def create_user_sentiment_summary(selected, data):
             ax.bar(neutral_users.index, neutral_users.values, color='grey')
             plt.xticks(rotation='vertical')
             plt.xlabel('User')
-            plt.ylabel('Count')
+            plt.ylabel('Messages Count')
             st.pyplot(fig)
         with col3:
             st.markdown("### Most Negative", unsafe_allow_html=True)
@@ -189,7 +189,7 @@ def create_user_sentiment_summary(selected, data):
             ax.bar(negative_users.index, negative_users.values, color='red')
             plt.xticks(rotation='vertical')
             plt.xlabel('User')
-            plt.ylabel('Count')
+            plt.ylabel('Messages Count')
             st.pyplot(fig)
 
 def create_wordcloud(selected, data):

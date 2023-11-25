@@ -11,16 +11,8 @@ st.sidebar.title("Analyzer for WhatsApp Chats")
 # File upload button
 file = st.sidebar.file_uploader("Select a file")
 
-st.markdown("""
-    <style>
-        .center {
-            text-align: center;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-st.markdown("<h1 class='center'>Analyzer for WhatsApp Chats</h1>", unsafe_allow_html=True)
 # Main heading
+st.markdown("<h1 style='text-align: center;'>Analyzer for WhatsApp Chats</h1>", unsafe_allow_html=True)
 
 
 if file is not None:
