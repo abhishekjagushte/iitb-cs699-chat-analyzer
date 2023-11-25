@@ -6,13 +6,21 @@ import features
 nltk.download('vader_lexicon')
 
 # App title
-st.sidebar.title("Whatsapp Chat Analyzer")
+st.sidebar.title("Analyzer for WhatsApp Chats")
 
 # File upload button
 file = st.sidebar.file_uploader("Select a file")
 
+st.markdown("""
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown("<h1 class='center'>Analyzer for WhatsApp Chats</h1>", unsafe_allow_html=True)
 # Main heading
-st.header("WhatsApp Chat Analysis")
 
 
 if file is not None:
