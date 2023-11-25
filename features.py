@@ -1,5 +1,6 @@
 import pandas as pd
 from wordcloud import WordCloud
+from collections import Counter
 
 #-1 => Negative
 # 0 => Neutral
@@ -20,7 +21,7 @@ def monthly(selected,df,sentiment):
     return df['month'].value_counts()
 
 #Count of messages of selected user per date having (0, 1, -1) sentiment.
-def daily(selected,df,sentimnent):
+def daily(selected,df,sentiment):
     if selected != 'Overall':
         df = df[df['user'] == selected]
     df = df[df['value'] == sentiment]
