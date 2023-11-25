@@ -49,3 +49,19 @@ if file is not None:
         # show daily timeline
         analysis_result.create_daily_timeline(selected, data)
         
+        # show monthly timeline
+        analysis_result.create_monthly_timeline(selected, data)
+
+        # Member contribution
+        analysis_result.create_member_contribution(selected, data)
+
+        # Most positive, negative and neutral users
+        analysis_result.create_user_sentiment_summary(selected, data)
+
+        # Show a wordcloud
+        analysis_result.create_wordcloud(selected, data)
+        
+        # Common words
+        analysis_result.create_word_frequency_analysis(selected, data)
+
+        

@@ -29,26 +29,20 @@ def daily(selected,df,sentiment):
     return daily
 
 #Count of messages of selected user per {year + month number + month} having (0, 1, -1) sentiment.
-def timeline(selected, df, sentiment):
+def timeline_monthly(selected, df, sentiment):
     if selected != 'Overall':
         df = df[df['user'] == selected]
-    df = df[df['value'] == -sentiment]
-    timeline = df.groupby(['year', 'month_num', 'month', 'day']).count()['message'].reset_index()
+    df = df[df['value']==-sentiment]
+    timeline = df.groupby(['year', 'month_num', 'month']).count()['message'].reset_index()
     time = []
     for i in range(timeline.shape[0]):
-        time.append(str(timeline['day'][i]) + "-" + str(timeline['month_num'][i]) + "-" + str(timeline['year'][i]))
-    timeline['day'] = time
+        time.append(timeline['month'][i] + "-" + str(timeline['year'][i]))
+    timeline['time'] = time
     return timeline
-
-#Percentage of message contributed having (0, 1, -1) sentiment.
-def percentage(df,sentiment):
-    df = round((df['user'][df['value']==sentiment].value_counts() / df[df['value']==sentiment].shape[0]) * 100, 2).reset_index().rename(
-        columns={'index': 'name', 'user': 'percent'})
-    return df
 
 # Wordcloud from words in message.
 def wordcloud(selected,df,sentiment):
-    f = open('stop_hinglish.txt', 'r')
+    f = open('assets/data/hinglish.txt', 'r')
     stop_words = f.read()
     if selected != 'Overall':
         df = df[df['user'] == selected]
@@ -68,7 +62,7 @@ def wordcloud(selected,df,sentiment):
 
 # Common words having (0, 1, -1) sentiment
 def common_words(selected,df,sentiment):
-    f = open('stop_hinglish.txt','r')
+    f = open('assets/data/hinglish.txt','r')
     stop_words = f.read()
     if selected != 'Overall':
         df = df[df['user'] == selected]
@@ -82,3 +76,18 @@ def common_words(selected,df,sentiment):
     # Most common 20 entries
     most_common_df = pd.DataFrame(Counter(words).most_common(20))
     return most_common_df
+
+def member_contribution(df, sentiment):
+    df = round((df['user'][df['value']==sentiment].value_counts() / df[df['value']==sentiment].shape[0]) * 100, 2).reset_index().rename(
+        columns={'index': 'name', 'user': 'percent'})
+    return df
+
+
+def user_sentiment_summary(df):
+    # Getting names per sentiment
+    positive_users = df['user'][df['value'] == 1].value_counts().head(10)
+    negative_users = df['user'][df['value'] == -1].value_counts().head(10)
+    neutral_users = df['user'][df['value'] == 0].value_counts().head(10)
+
+    return positive_users, neutral_users, negative_users
+
