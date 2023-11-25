@@ -61,24 +61,24 @@ def create_daily_timeline(selected, data):
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("### Positive")
-        daily_timeline = features.timeline(selected, data, 1)
+        daily_timeline = features.daily(selected, data, 1)
         fig, ax = plt.subplots()
-        ax.plot(daily_timeline['day'], daily_timeline['message'], color='green')
+        ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='green')
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
 
     with col2:
         st.markdown("### Neutral")        
-        daily_timeline = features.timeline(selected, data, 0)
+        daily_timeline = features.daily(selected, data, 0)
         fig, ax = plt.subplots()
-        ax.plot(daily_timeline['day'], daily_timeline['message'], color='grey')
+        ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='grey')
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
 
     with col3:
         st.markdown("### Negative")        
-        daily_timeline = features.timeline(selected, data, -1)
+        daily_timeline = features.daily(selected, data, -1)
         fig, ax = plt.subplots()
-        ax.plot(daily_timeline['day'], daily_timeline['message'], color='red')
+        ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='red')
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
