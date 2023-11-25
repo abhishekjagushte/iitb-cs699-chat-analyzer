@@ -46,6 +46,6 @@ if file is not None:
         # show weekly analysis
         analysis_result.create_weekly_analysis(selected, data)
         
-        # show weekly analysis
+        # show daily timeline
         analysis_result.create_daily_timeline(selected, data)
         
