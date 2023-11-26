@@ -33,7 +33,7 @@ def daily(selected,df,sentiment):
 def timeline_monthly(selected, df, sentiment):
     if selected != 'Overall':
         df = df[df['user'] == selected]
-    df = df[df['value']==-sentiment]
+    df = df[df['value']==sentiment]
     timeline = df.groupby(['year', 'month_num', 'month']).count()['message'].reset_index()
     time = []
     for i in range(timeline.shape[0]):
